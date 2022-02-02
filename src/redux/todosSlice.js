@@ -4,9 +4,9 @@ export const todosSlice = createSlice({
   name: "todos",
   initialState: {
     todos: [
-      { id: "1", text: "Learn JavaScript", completed: true },
-      { id: "2", text: "Learn React", completed: false },
-      { id: "3", text: "Have a life!", completed: false },
+      { id: nanoid(), text: "Learn JavaScript", completed: true },
+      { id: nanoid(), text: "Learn React", completed: false },
+      { id: nanoid(), text: "Have a life!", completed: false },
     ],
   },
   reducers: {
@@ -17,8 +17,14 @@ export const todosSlice = createSlice({
         completed: false,
       });
     },
+    toggle: (state, action) => {
+      const todo = state.todos.find((t) => t.id === action.payload);
+      if (todo) {
+        todo.completed = !todo.completed;
+      }
+    },
   },
 });
 
-export const { addTodo } = todosSlice.actions;
+export const { addTodo, toggle } = todosSlice.actions;
 export default todosSlice.reducer;
