@@ -6,14 +6,14 @@ import { toggleAll } from "../redux/todosSlice";
 
 const Content = () => {
   const dispatch = useDispatch();
-  const { checked, todos } = useSelector((state) => state.todos);
+  const { todos } = useSelector((state) => state.todos);
   return (
     <>
       <section className="main">
         <input
           className="toggle-all"
           type="checkbox"
-          checked={checked}
+          checked={todos.filter((todo) => !todo.completed).length === 0}
           onChange={() => dispatch(toggleAll())}
         />
         <label
