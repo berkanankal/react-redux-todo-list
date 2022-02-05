@@ -9,6 +9,7 @@ export const todosSlice = createSlice({
       { id: nanoid(), text: "Have a life!", completed: false },
     ],
     activeFilter: "all",
+    checked: false,
   },
   reducers: {
     addTodo: (state, action) => {
@@ -33,6 +34,10 @@ export const todosSlice = createSlice({
     clearCompleted: (state) => {
       state.todos = state.todos.filter((todo) => !todo.completed);
     },
+    toggleAll: (state) => {
+      state.checked = !state.checked;
+      state.todos.forEach((todo) => (todo.completed = state.checked));
+    },
   },
 });
 
@@ -42,5 +47,6 @@ export const {
   deleteTodo,
   changeActiveFilter,
   clearCompleted,
+  toggleAll,
 } = todosSlice.actions;
 export default todosSlice.reducer;

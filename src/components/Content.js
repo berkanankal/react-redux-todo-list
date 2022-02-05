@@ -1,13 +1,28 @@
 import React from "react";
 import ContentFooter from "../components/ContentFooter";
 import TodoList from "../components/TodoList";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleAll } from "../redux/todosSlice";
 
 const Content = () => {
+  const dispatch = useDispatch();
+  const { checked, todos } = useSelector((state) => state.todos);
   return (
     <>
       <section className="main">
-        <input className="toggle-all" type="checkbox" />
-        <label htmlFor="toggle-all">Mark all as complete</label>
+        <input
+          className="toggle-all"
+          type="checkbox"
+          checked={checked}
+          onChange={() => dispatch(toggleAll())}
+        />
+        <label
+          htmlFor="toggle-all"
+          onClick={() => dispatch(toggleAll())}
+          style={{ display: todos.length ? "block" : "none" }}
+        >
+          Mark all as complete
+        </label>
 
         <TodoList />
       </section>

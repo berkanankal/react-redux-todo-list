@@ -18,7 +18,10 @@ const ContentFooter = () => {
   };
 
   return (
-    <footer className="footer">
+    <footer
+      className="footer"
+      style={{ display: todos.length ? "block" : "none" }}
+    >
       <span className="todo-count">
         <strong>{todosLeft}</strong> item{todosLeft > 1 ? "s" : ""} left
       </span>
